@@ -31,7 +31,7 @@ var trivia6 = {
     "question": "What are dried plums called?",
     "answer": "Prunes",
 };
-
+var setTimer;
 var triviaArr = [trivia1, trivia2, trivia3, trivia4, trivia5, trivia6, ];
 var time;
 var correct;
@@ -49,9 +49,22 @@ $(".start").on("click", function () {
     wrong = 0;
     oot = 0;
     secondsLeft = 30;
-    clock();
+    var setTimer = setInterval(countdown, 1000);
+    // function countdown() {
+    //     if (secondsLeft < 0) {
+    //         clearInterval(setTimer);
+    //         $("#timer").html("Time's up!");
+    //     } else {
+    //         $("#timer").html(secondsLeft);
+    //         secondsLeft--;
+    //     }
     $("#timer").html(secondsLeft);
-    $(".game").html(trivia1.queston);
+    for (i=0; i<triviaArr.length; i++) {
+var trivQuest= triviaArr[i].question
+    
+    $(".question").html(trivQuest);
+    $(".answer").html("Answer: " );
+    }
     console.log(secondsLeft);
 });
 //reset between questions
@@ -68,11 +81,9 @@ var reset = setInterval(function () {
 var secondsLeft = 30;
 
 
-var timerId = setInterval(countdown, 1000);
-
-var clock=function countdown() {
+function countdown() {
     if (secondsLeft < 0) {
-        clearInterval(timerId);
+        clearInterval(setTimer);
         $("#timer").html("Time's up!");
     } else {
         $("#timer").html(secondsLeft);
