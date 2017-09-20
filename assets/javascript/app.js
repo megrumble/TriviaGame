@@ -1,5 +1,17 @@
 // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
+$(document).ready(function(){
+    
+        $(document).bind('keypress',pressed);
+    });
+    
+    function pressed(e)
+    {
+        if(e.keyCode === 13)
+        {
+            alert('enter pressed');
+            //put button.click() here
+        }
+    }
 
 var trivia1 = {
     "question": "What gives green pasta its color?",
@@ -58,10 +70,10 @@ function displayQuestion() {
 
 
     $(".answer").html("Answer: "+ "<input type='text' id='input'>");
-$(".answer").on ('keypress',"#input", function(event){
+// $)(".answer").on ('keypress',"#input", function(event){
     
-console.log();
-})
+// console.log();
+// })
     console.log(triviaId.question);
 }
 //reset between questions
