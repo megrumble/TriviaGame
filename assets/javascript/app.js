@@ -8,9 +8,13 @@ $(document).ready(function(){
     {
         if(e.keyCode === 13)
         {
-            alert('enter pressed');
+            console.log("enter")
             //put button.click() here
         }
+        // $(".answer").on ('keypress',"#input", function(event){
+            
+        // console.log();
+        // })
     }
 
 var trivia1 = {
@@ -66,14 +70,8 @@ $(".start").on("click", function () {
 function displayQuestion() {
     var triviaId=triviaArr[count]
     $(".question").html(triviaId.question);
+     $(".answer").html("Answer: "+ "<input type='text' id='input'>");
 
-
-
-    $(".answer").html("Answer: "+ "<input type='text' id='input'>");
-// $)(".answer").on ('keypress',"#input", function(event){
-    
-// console.log();
-// })
     console.log(triviaId.question);
 }
 //reset between questions
