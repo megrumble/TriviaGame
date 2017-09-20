@@ -71,8 +71,9 @@ function displayQuestion() {
     var triviaId=triviaArr[count]
     $(".question").html(triviaId.question);
      $(".answer").html("Answer: "+ "<input type='text' id='input'>");
-
+var userGuess=$("#input").text;
     console.log(triviaId.question);
+    console.log(userGuess)
 }
 //reset between questions
 function reset() {
