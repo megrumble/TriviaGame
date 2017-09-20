@@ -57,8 +57,11 @@ function displayQuestion() {
 
 
 
-    $(".answer").html("Answer: "+ "<input type:text>");
-
+    $(".answer").html("Answer: "+ "<input type='text' id='input'>");
+$(".answer").on ('keypress',"#input", function(event){
+    
+console.log();
+})
     console.log(triviaId.question);
 }
 //reset between questions
