@@ -32,7 +32,7 @@ var trivia6 = {
     "answer": "Prunes",
 };
 var setTimer;
-var triviaArr = [trivia1, trivia2, trivia3, trivia4, trivia5, trivia6, ];
+var triviaArr = [trivia1, trivia2, trivia3, trivia4, trivia5, trivia6 ];
 var time;
 var correct;
 var wrong;
@@ -53,13 +53,13 @@ $(".start").on("click", function () {
 
 function displayQuestion() {
     var triviaId=triviaArr[count]
-    $("#question").html(triviaId.question);
+    $(".question").html(triviaId.question);
 
 
 
     $(".answer").html("Answer: ");
 
-    console.log(question);
+    console.log(triviaId.question);
 }
 //reset between questions
 function reset() {
