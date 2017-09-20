@@ -37,45 +37,42 @@ var time;
 var correct;
 var wrong;
 var oot;
+var count = 0;
 console.log(trivia1);
-// window.onload = function () {
-//     secondsLeft = 30;
-//     $("#timer").html(secondsLeft);
-//     return;
-// };
-//start button
+
 $(".start").on("click", function () {
     correct = 0;
     wrong = 0;
     oot = 0;
     secondsLeft = 30;
     var setTimer = setInterval(countdown, 1000);
-    // function countdown() {
-    //     if (secondsLeft < 0) {
-    //         clearInterval(setTimer);
-    //         $("#timer").html("Time's up!");
-    //     } else {
-    //         $("#timer").html(secondsLeft);
-    //         secondsLeft--;
-    //     }
-    $("#timer").html(secondsLeft);
-    for (i=0; i<triviaArr.length; i++) {
-var trivQuest= triviaArr[i].question
-    
-    $(".question").html(trivQuest);
-    $(".answer").html("Answer: " );
-    }
-    console.log(secondsLeft);
-});
-//reset between questions
-var timeLeft = 3;
-var reset = setInterval(function () {
-    timeLeft--;
-    if (timeLeft <= 0) {
-        clearInterval(reset);
-    }
-}, 1000);
 
+    $("#timer").html(secondsLeft);
+    displayQuestion();
+});
+
+function displayQuestion() {
+    var triviaId=triviaArr[count]
+    $("#question").html(triviaId.question);
+
+
+
+    $(".answer").html("Answer: ");
+
+    console.log(question);
+}
+//reset between questions
+function reset() {
+
+
+    var timeLeft = 3;
+    var reset = setInterval(function () {
+        timeLeft--;
+        if (timeLeft <= 0) {
+            clearInterval(reset);
+        }
+    }, 1000);
+};
 
 //countdown timer
 var secondsLeft = 30;
