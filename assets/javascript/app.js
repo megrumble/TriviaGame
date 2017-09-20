@@ -8,7 +8,8 @@ $(document).ready(function(){
     {
         if(e.keyCode === 13)
         {
-            console.log("enter")
+            console.log("enter");
+            console.log($("#input").val());
             //put button.click() here
         }
         // $(".answer").on ('keypress',"#input", function(event){
@@ -71,10 +72,11 @@ function displayQuestion() {
     var triviaId=triviaArr[count]
     $(".question").html(triviaId.question);
      $(".answer").html("Answer: "+ "<input type='text' id='input'>");
-var userGuess=$("#input").text;
+var userGuess=$("#input").val();
     console.log(triviaId.question);
-    console.log(userGuess)
+
 }
+console.log(userGuess);
 //reset between questions
 function reset() {
 
