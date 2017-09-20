@@ -57,7 +57,7 @@ function displayQuestion() {
 
 
 
-    $(".answer").html("Answer: ");
+    $(".answer").html("Answer: "+ "<input type:text>");
 
     console.log(triviaId.question);
 }
