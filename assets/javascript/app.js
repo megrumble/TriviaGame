@@ -1,23 +1,23 @@
 // var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-$(document).ready(function(){
-    
-        $(document).bind('keypress',pressed);
-    });
-    
-    function pressed(e)
-    {
-        if(e.keyCode === 13)
-        {
-            console.log("enter");
-            console.log($("#input").val());
-            //put button.click() here
-        }
-        // $(".answer").on ('keypress',"#input", function(event){
-            
-        // console.log();
-        // })
-    }
+$(document).ready(function () {
 
+    $(document).bind('keypress', pressed);
+});
+
+function pressed(e) {
+    if (e.keyCode === 13) {
+        console.log("enter");
+        console.log($("#input").val());
+        checkAnswer();
+        //put button.click() here
+
+
+        // $(".answer").on ('keypress',"#input", function(event){
+    }
+    // console.log();
+    // })
+}
+var userGuess = $("#input").val();
 var trivia1 = {
     "question": "What gives green pasta its color?",
     "answer": "Spinach",
@@ -49,14 +49,14 @@ var trivia6 = {
     "answer": "Prunes",
 };
 var setTimer;
-var triviaArr = [trivia1, trivia2, trivia3, trivia4, trivia5, trivia6 ];
+var triviaArr = [trivia1, trivia2, trivia3, trivia4, trivia5, trivia6];
 var time;
 var correct;
 var wrong;
 var oot;
 var count = 0;
 console.log(trivia1);
-
+var triviaId=0;
 $(".start").on("click", function () {
     correct = 0;
     wrong = 0;
@@ -69,14 +69,28 @@ $(".start").on("click", function () {
 });
 
 function displayQuestion() {
-    var triviaId=triviaArr[count]
+    var triviaId = triviaArr[count]
     $(".question").html(triviaId.question);
-     $(".answer").html("Answer: "+ "<input type='text' id='input'>");
-var userGuess=$("#input").val();
-    console.log(triviaId.question);
+    $(".answer").html("Answer: " + "<input type='text' id='input'>");
 
+    console.log(triviaId.question);
 }
-console.log(userGuess);
+//check answer
+function checkAnswer() {
+    if (userGuess == triviaId.answer) {
+        $(".answer").html("Correct!");
+        count++;
+      
+    }else {
+        $(".answer").html("Wrong. Try again.")
+    }
+    count++;
+    reset();
+    displayQuestion();
+}
+
+
+
 //reset between questions
 function reset() {
 
