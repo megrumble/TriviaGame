@@ -14,6 +14,7 @@ function pressed(e) {
     
 }
 var userGuess = $("#input").val();
+console.log(userGuess);
 var trivia1 = {
     "question": "What gives green pasta its color?",
     "answer": "Spinach",
@@ -76,6 +77,7 @@ function displayQuestion() {
     $(".answer").html("Answer: " + "<input type='text' id='input'>");
     setTimer();
     console.log(triviaId.question);
+    console.log(triviaId.answer);
 }
 //increment question
 function nextQuestion() {
@@ -89,12 +91,15 @@ function nextQuestion() {
 }
 //check answer
 function checkAnswer() {
-    if (userGuess == triviaId.answer) {
+    if ($("#input").val() === triviaId.answer) {
         $(".answer").html("Correct!");
         nextQuestion();
 
     } else {
-        $(".answer").html("Wrong. Try again.")
+        $(".answer").html("Wrong. Try again.");
+        setTimeout(function(){
+            $(".answer").html("Answer: " + "<input type='text' id='input'>");   
+        },2000)
     }
 
 }
