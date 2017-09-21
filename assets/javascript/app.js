@@ -8,42 +8,42 @@ function pressed(e) {
     if (e.keyCode === 13) {
         console.log("enter");
         console.log($("#input").val());
+        userGuess = $("#input").val().toLowerCase();
+        console.log(userGuess);
         checkAnswer();
   
     }
     
 }
-var userGuess = $("#input").val();
-console.log(userGuess);
 var trivia1 = {
     "question": "What gives green pasta its color?",
-    "answer": "Spinach",
+    "answer": "spinach",
 };
 
 var trivia2 = {
     "question": "What is the salted roe of a sturgeon called?",
-    "answer": "Caviar",
+    "answer": "caviar",
 };
 
 
 var trivia3 = {
     "question": "Which vegetable is a green variety of banana, used as a staple food in the tropics?",
-    "answer": "Plantain",
+    "answer": "plantain",
 };
 
 var trivia4 = {
     "question": "What type of flowers produce vanilla pods?",
-    "answer": "Orchids",
+    "answer": "orchids",
 };
 
 var trivia5 = {
     "question": "For which edible fungus is Perigord, France famous?",
-    "answer": "Truffles",
+    "answer": "truffles",
 };
 
 var trivia6 = {
     "question": "What are dried plums called?",
-    "answer": "Prunes",
+    "answer": "prunes",
 };
 var secondsLeft;
 var setTimer;
@@ -87,13 +87,15 @@ function nextQuestion() {
     if (count === triviaArr.length) {
         count = 0;
     }
-
+setTimer();
 }
 //check answer
 function checkAnswer() {
-    if ($("#input").val() === triviaId.answer) {
+    if (userGuess === triviaArr[count].answer) {
         $(".answer").html("Correct!");
+    
         nextQuestion();
+        
 
     } else {
         $(".answer").html("Wrong. Try again.");
