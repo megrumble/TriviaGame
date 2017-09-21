@@ -9,13 +9,9 @@ function pressed(e) {
         console.log("enter");
         console.log($("#input").val());
         checkAnswer();
-        //put button.click() here
-
-
-        // $(".answer").on ('keypress',"#input", function(event){
+  
     }
-    // console.log();
-    // })
+    
 }
 var userGuess = $("#input").val();
 var trivia1 = {
@@ -48,6 +44,7 @@ var trivia6 = {
     "question": "What are dried plums called?",
     "answer": "Prunes",
 };
+var secondsLeft;
 var setTimer;
 var triviaArr = [trivia1, trivia2, trivia3, trivia4, trivia5, trivia6];
 var time;
@@ -56,58 +53,53 @@ var wrong;
 var oot;
 var count = 0;
 console.log(trivia1);
-var triviaId=0;
+var triviaId = 0;
 $(".start").on("click", function () {
     correct = 0;
     wrong = 0;
     oot = 0;
-    secondsLeft = 30;
-    var setTimer = setInterval(countdown, 1000);
+    secondsLeft = 20;
 
-    $("#timer").html(secondsLeft);
     displayQuestion();
 });
+//set timer
+function setTimer() {
 
+    setInterval(countdown, 1000);
+
+    $("#timer").html(secondsLeft);
+}
+//display question
 function displayQuestion() {
     var triviaId = triviaArr[count]
     $(".question").html(triviaId.question);
     $(".answer").html("Answer: " + "<input type='text' id='input'>");
-
+    setTimer();
     console.log(triviaId.question);
+}
+//increment question
+function nextQuestion() {
+    count++;
+
+    setTimeout(displayQuestion, 3000);
+    if (count === triviaArr.length) {
+        count = 0;
+    }
+
 }
 //check answer
 function checkAnswer() {
     if (userGuess == triviaId.answer) {
         $(".answer").html("Correct!");
-        count++;
-      
-    }else {
+        nextQuestion();
+
+    } else {
         $(".answer").html("Wrong. Try again.")
     }
-    count++;
-    reset();
-    displayQuestion();
+
 }
 
-
-
-//reset between questions
-function reset() {
-
-
-    var timeLeft = 3;
-    var reset = setInterval(function () {
-        timeLeft--;
-        if (timeLeft <= 0) {
-            clearInterval(reset);
-        }
-    }, 1000);
-};
-
 //countdown timer
-var secondsLeft = 30;
-
-
 function countdown() {
     if (secondsLeft < 0) {
         clearInterval(setTimer);
