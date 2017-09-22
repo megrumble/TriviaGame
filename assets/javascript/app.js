@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
     $(document).bind('keypress', pressed);
-    document.getElementById(input).focus();
+   
 });
 
 function pressed(e) {
@@ -80,6 +80,7 @@ function displayQuestion() {
     triviaId = triviaArr[count]
     $(".question").html(triviaId.question);
     $(".answer").html("Answer: " + "<input type='text' id='input'>");
+    document.getElementById("input").focus();
     setTimer();
     console.log(triviaId.question);
     console.log(triviaId.answer);
@@ -110,7 +111,9 @@ function checkAnswer() {
         $(".answer").html("Wrong. Try again.");
         setTimeout(function () {
             $(".answer").html("Answer: " + "<input type='text' id='input'>");
-        }, 2000)
+            document.getElementById("input").focus();
+        }, 2000);
+       
     }
 else if (!timerRunning){
     nextQuestion();
