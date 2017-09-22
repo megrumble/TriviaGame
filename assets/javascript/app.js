@@ -2,6 +2,7 @@
 $(document).ready(function () {
 
     $(document).bind('keypress', pressed);
+    document.getElementById(input).focus();
 });
 
 function pressed(e) {
@@ -11,9 +12,9 @@ function pressed(e) {
         userGuess = $("#input").val().toLowerCase();
         console.log(userGuess);
         checkAnswer();
-  
+
     }
-    
+
 }
 var trivia1 = {
     "question": "What gives green pasta its color?",
@@ -45,6 +46,8 @@ var trivia6 = {
     "question": "What are dried plums called?",
     "answer": "prunes",
 };
+var intervalId;
+var timerRunning = false;
 var secondsLeft;
 var setTimer;
 var triviaArr = [trivia1, trivia2, trivia3, trivia4, trivia5, trivia6];
@@ -65,14 +68,16 @@ $(".start").on("click", function () {
 });
 //set timer
 function setTimer() {
-
-    setInterval(countdown, 1000);
-
+    if (!timerRunning) {
+        intervalId = setInterval(countdown, 1000);
+        timerRunning = true;
+        secondsLeft = 20;
+    }
     $("#timer").html(secondsLeft);
 }
 //display question
 function displayQuestion() {
-    var triviaId = triviaArr[count]
+    triviaId = triviaArr[count]
     $(".question").html(triviaId.question);
     $(".answer").html("Answer: " + "<input type='text' id='input'>");
     setTimer();
@@ -86,31 +91,39 @@ function nextQuestion() {
     setTimeout(displayQuestion, 3000);
     if (count === triviaArr.length) {
         count = 0;
+       
     }
-setTimer();
+    
+
 }
 //check answer
 function checkAnswer() {
-    if (userGuess === triviaArr[count].answer) {
+    if (userGuess === triviaId.answer) {
         $(".answer").html("Correct!");
-    
+        clearInterval(intervalId);
+        timerRunning = false;
+        correct += 1;
         nextQuestion();
-        
 
-    } else {
-        $(".answer").html("Wrong. Try again.");
-        setTimeout(function(){
-            $(".answer").html("Answer: " + "<input type='text' id='input'>");   
-        },2000)
     }
-
+     else if (userGuess !== triviaId.answer && (timerRunning)) {
+        $(".answer").html("Wrong. Try again.");
+        setTimeout(function () {
+            $(".answer").html("Answer: " + "<input type='text' id='input'>");
+        }, 2000)
+    }
+else if (!timerRunning){
+    nextQuestion();
+}
 }
 
 //countdown timer
 function countdown() {
     if (secondsLeft < 0) {
         clearInterval(setTimer);
+        timerRunning = false;
         $("#timer").html("Time's up!");
+      
     } else {
         $("#timer").html(secondsLeft);
         secondsLeft--;
