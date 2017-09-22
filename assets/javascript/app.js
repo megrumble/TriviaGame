@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
     $(document).bind('keypress', pressed);
-   
+
 });
 
 function pressed(e) {
@@ -88,13 +88,13 @@ function displayQuestion() {
 //increment question
 function nextQuestion() {
     count++;
-
+    
     setTimeout(displayQuestion, 3000);
     if (count === triviaArr.length) {
         count = 0;
-       
+
     }
-    
+
 
 }
 //check answer
@@ -106,18 +106,16 @@ function checkAnswer() {
         correct += 1;
         nextQuestion();
 
-    }
-     else if (userGuess !== triviaId.answer && (timerRunning)) {
+    } else if (userGuess !== triviaId.answer && (timerRunning)) {
         $(".answer").html("Wrong. Try again.");
         setTimeout(function () {
             $(".answer").html("Answer: " + "<input type='text' id='input'>");
             document.getElementById("input").focus();
         }, 2000);
-       
+
+    } else if (!timerRunning) {
+        nextQuestion();
     }
-else if (!timerRunning){
-    nextQuestion();
-}
 }
 
 //countdown timer
@@ -126,7 +124,7 @@ function countdown() {
         clearInterval(setTimer);
         timerRunning = false;
         $("#timer").html("Time's up!");
-      
+        nextQuestion();
     } else {
         $("#timer").html(secondsLeft);
         secondsLeft--;
