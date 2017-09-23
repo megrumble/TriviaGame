@@ -17,7 +17,7 @@ function pressed(e) {
     }
 
 }
-
+$("#score").html("&nbsp");
 $("#timer").html("&nbsp");
 //trivia objects
 var trivia1 = {
@@ -67,6 +67,7 @@ $(".start").on("click", function () {
     count = 0;
     secondsLeft = 10;
     $("#score").empty();
+    $(".start").hide();
     displayQuestion();
 });
 //set timer
@@ -96,10 +97,11 @@ function nextQuestion() {
     setTimeout(displayQuestion, 3000);
     if (count === triviaArr.length) {
 
-        $("#score").html("You got " + (correct) + " out of " + (triviaArr.length) + " correct. Good Job!")
+        $("#score").html("You got " + (correct) + " out of " + (triviaArr.length) + " correct. Good Job!");
+        $(".start").show();
     }
 
-
+   
 }
 //check answer
 function checkAnswer() {

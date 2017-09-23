@@ -29,8 +29,13 @@ h2 {
 }
 
 .start {
-    width: 100%
+    width: 100%;
+    background-color: #4A0808;
+    color: #E6B0B0;
+    font-size: 25px;
+    
 }
+
 
 .question,
 .answer {
