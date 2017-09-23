@@ -68,12 +68,13 @@ $(".start").on("click", function () {
 });
 //set timer
 function setTimer() {
+    secondsLeft = 20;
     if (!timerRunning) {
-        intervalId = setInterval(countdown, 1000);
-        timerRunning = true;
-        secondsLeft = 20;
-    }
+       intervalId = setInterval(countdown, 1000);
+     timerRunning = true;
+    };
     $("#timer").html(secondsLeft);
+    $("#message").empty();
 }
 //display question
 function displayQuestion() {
@@ -91,8 +92,8 @@ function nextQuestion() {
     
     setTimeout(displayQuestion, 3000);
     if (count === triviaArr.length) {
-        count = 0;
-
+        // count = 0;
+$("#score").html("You got "+ (correct) +" out of "+(triviaArr.length)+ " correct. Good Job!")
     }
 
 
@@ -105,6 +106,7 @@ function checkAnswer() {
         timerRunning = false;
         correct += 1;
         nextQuestion();
+    
 
     } else if (userGuess !== triviaId.answer && (timerRunning)) {
         $(".answer").html("Wrong. Try again.");
@@ -113,17 +115,19 @@ function checkAnswer() {
             document.getElementById("input").focus();
         }, 2000);
 
-    } else if (!timerRunning) {
-        nextQuestion();
+    // } else if (!timerRunning) {
+    //     nextQuestion();
     }
 }
 
 //countdown timer
 function countdown() {
     if (secondsLeft < 0) {
-        clearInterval(setTimer);
+        clearInterval(intervalId);
         timerRunning = false;
-        $("#timer").html("Time's up!");
+        $("#timer").html("Time's up!")
+        $("#message").html("The correct answer is " + (triviaId.answer));
+        wrong +=1;
         nextQuestion();
     } else {
         $("#timer").html(secondsLeft);
