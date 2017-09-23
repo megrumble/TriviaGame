@@ -4,11 +4,12 @@ $(document).ready(function () {
     $(document).bind('keypress', pressed);
 
 });
-
+//enter key
 function pressed(e) {
     if (e.keyCode === 13) {
         console.log("enter");
         console.log($("#input").val());
+        //user input
         userGuess = $("#input").val().toLowerCase();
         console.log(userGuess);
         checkAnswer();
@@ -16,6 +17,9 @@ function pressed(e) {
     }
 
 }
+
+$("#timer").html("&nbsp");
+//trivia objects
 var trivia1 = {
     "question": "What gives green pasta its color?",
     "answer": "spinach",
@@ -54,24 +58,23 @@ var triviaArr = [trivia1, trivia2, trivia3, trivia4, trivia5, trivia6];
 var time;
 var correct;
 var wrong;
-var oot;
 var count = 0;
 console.log(trivia1);
 var triviaId = 0;
 $(".start").on("click", function () {
     correct = 0;
     wrong = 0;
-    oot = 0;
-    secondsLeft = 20;
-
+    count = 0;
+    secondsLeft = 10;
+    $("#score").empty();
     displayQuestion();
 });
 //set timer
 function setTimer() {
-    secondsLeft = 20;
+    secondsLeft = 10;
     if (!timerRunning) {
-       intervalId = setInterval(countdown, 1000);
-     timerRunning = true;
+        intervalId = setInterval(countdown, 1000);
+        timerRunning = true;
     };
     $("#timer").html(secondsLeft);
     $("#message").empty();
@@ -89,11 +92,11 @@ function displayQuestion() {
 //increment question
 function nextQuestion() {
     count++;
-    
+
     setTimeout(displayQuestion, 3000);
     if (count === triviaArr.length) {
-        // count = 0;
-$("#score").html("You got "+ (correct) +" out of "+(triviaArr.length)+ " correct. Good Job!")
+
+        $("#score").html("You got " + (correct) + " out of " + (triviaArr.length) + " correct. Good Job!")
     }
 
 
@@ -101,12 +104,13 @@ $("#score").html("You got "+ (correct) +" out of "+(triviaArr.length)+ " correct
 //check answer
 function checkAnswer() {
     if (userGuess === triviaId.answer) {
+        $("#timer").html("&nbsp");
         $(".answer").html("Correct!");
         clearInterval(intervalId);
         timerRunning = false;
         correct += 1;
         nextQuestion();
-    
+
 
     } else if (userGuess !== triviaId.answer && (timerRunning)) {
         $(".answer").html("Wrong. Try again.");
@@ -114,9 +118,6 @@ function checkAnswer() {
             $(".answer").html("Answer: " + "<input type='text' id='input'>");
             document.getElementById("input").focus();
         }, 2000);
-
-    // } else if (!timerRunning) {
-    //     nextQuestion();
     }
 }
 
@@ -127,7 +128,8 @@ function countdown() {
         timerRunning = false;
         $("#timer").html("Time's up!")
         $("#message").html("The correct answer is " + (triviaId.answer));
-        wrong +=1;
+        $(".answer").html("&nbsp");
+        wrong += 1;
         nextQuestion();
     } else {
         $("#timer").html(secondsLeft);
