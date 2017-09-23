@@ -125,7 +125,7 @@ function checkAnswer() {
 
 //countdown timer
 function countdown() {
-    if (secondsLeft < 0) {
+    if (secondsLeft < 1) {
         clearInterval(intervalId);
         timerRunning = false;
         $("#timer").html("Time's up!")
